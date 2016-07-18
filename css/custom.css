@@ -1,0 +1,28 @@
+.gray{
+    color: lightgray;
+}
+
+.trace
+{
+
+    background-color: #f7f7f7;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.errormessage
+{
+    background-color: #f76167;
+    border: 2px dashed #c42c2c;
+    color: white;
+    border-radius: 15px;
+    padding-top: 10px;
+    margin-left: 20px;
+}
+
+.center
+{
+
+    float: none;
+    margin: 0 auto;
+}

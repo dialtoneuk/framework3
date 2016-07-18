@@ -1,0 +1,26 @@
+{
+  "name": "dialtoneuk/framework3",
+  "description": "Framework 3 is the all new version of Framework.",
+  "minimum-stability": "alpha",
+  "license": "apache",
+  "autoload": {
+    "psr-4": {
+      "Framework\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Lewis Lancaster",
+      "email": "hackerman@zyon.io"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "illuminate/container": "^5.1",
+    "illuminate/database": "^5.1",
+    "mikecao/flight": "^1.2",
+    "dwoo/dwoo": "dev-beta",
+    "iignatov/lightopenid": "*",
+    "mashape/unirest-php": "2.*"
+  }
+}
