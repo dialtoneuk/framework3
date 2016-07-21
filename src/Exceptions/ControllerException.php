@@ -5,14 +5,14 @@ namespace Framework\Exceptions;
 /**
  * Lewis Lancaster 2016
  *
- * Class ViewException
+ * Class ControllerException
  *
  * @package Framework\Exceptions
  */
 
 use RuntimeException;
 
-class ViewException extends RuntimeException
+class ControllerException extends RuntimeException
 {
 
     //

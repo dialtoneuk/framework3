@@ -24,23 +24,3 @@
  * ~ Now integrated with Bootstrap.
  *
  */
-
-require_once "vendor/autoload.php";
-
-use Framework\Views\Manager;
-
-/** @noinspection PhpMethodParametersCountMismatchInspection */
-
-Flight::route('/*', function( $route )
-{
-
-    $manager = new Manager();
-
-    $manager->process( $route->splat );
-}, true );
-
-/**
- * Start the flight engine.
- */
-
-Flight::start();
