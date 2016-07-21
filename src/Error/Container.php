@@ -10,6 +10,7 @@ namespace Framework\Error;
  */
 
 use Exception;
+use Flight;
 
 class Container
 {
@@ -68,6 +69,23 @@ class Container
         }
 
         return $instance;
+    }
+
+    /**
+     * Renders an error page
+     *
+     * @param Instance $instance
+     */
+
+    public function renderErrorPage( Instance $instance )
+    {
+
+        Flight::render('error/developer', array(
+            'hash'      => $instance->getErrorHash(),
+            'trace'     => $instance->getTrace(),
+            'message'   => $instance->getMessage(),
+            'line'      => $instance->getLine()
+        ));
     }
 
     /**

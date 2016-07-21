@@ -5,7 +5,7 @@
  * |  ____|                                         | |
  * | |__ _ __ __ _ _ __ ___   _____      _____  _ __| | __
  * |  __| '__/ _` | '_ ` _ \ / _ \ \ /\ / / _ \| '__| |/ /
- * | |  | | | (_| | | | | | |  __/\ V  V / (_) | |  |   <   Version 3.0.0
+ * | |  | | | (_| | | | | | |  __/\ V  V / (_) | |  |   <   Version 3.1.0
  * |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\
  *
  * This framework was created souly by Lewis Lancaster. Its an MVC/Restless/Hybrid that's powered by several suns, it
@@ -15,12 +15,13 @@
  * FEATURES AS OF VERSION 3
  * ========================
  *
- * + New login gate system.
- *      = Easily create login gates for sites that want to take advantage of multiple logins.
- *      = Written as a MVC ( Minus the viewer ) style system.
- * + Added Bootstrap as the main front-end framework.
- * ~ Fixed bug with Ajax and viewer not seperating keys.
- * ~ Cleaned up the code and added disclaimer to each file.
- * ~ Now integrated with Bootstrap.
- *
+ *  + Added new application container.
+ *  + Added new view system.
  */
+require_once 'vendor/autoload.php';
+
+/**
+ * Start the application
+ */
+
+$application = new \Framework\Application();

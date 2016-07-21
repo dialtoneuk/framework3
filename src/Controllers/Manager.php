@@ -12,9 +12,66 @@ namespace Framework\Controllers;
 use Flight;
 use Framework\Exceptions\ControllerException;
 use Framework\Controllers\Structures\View;
+use ReflectionClass;
 
 class Manager
 {
+
+	/**
+	 * Manager constructor.
+	 */
+
+	public function __construct ()
+	{
+
+		Flight::route('/@view/*', function( $view, $splat )
+		{
+
+			if( $this->hasURLKeys( $splat ) )
+			{
+
+				$splat = $this->removeURLKeys( $splat );
+			}
+
+			$this->processView( $view, $splat );
+		}, true );
+
+		Flight::start();
+	}
+
+	/**
+	 * Removes the URL keys
+	 *
+	 * @param $splat
+	 *
+	 * @return mixed
+	 */
+
+	private function removeURLKeys( $splat )
+	{
+
+		return explode('?', $splat )[0];
+	}
+
+	/**
+	 * If you have URL keys
+	 *
+	 * @param $splat
+	 *
+	 * @return bool
+	 */
+
+	private function hasURLKeys( $splat )
+	{
+
+		if( empty( explode('?', $splat ) ) == false )
+		{
+
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Process the view
@@ -194,10 +251,26 @@ class Manager
 	 * @return array|null
 	 */
 
-	private function splatToArray( $splat )
+	private function splatToArray( $splat, $view )
 	{
 
 		$splat = explode('/', $splat );
+
+		$array = array();
+
+		if( $splat[0] == $view )
+		{
+
+			foreach( $splat as $key=>$value )
+			{
+
+				if( $value != $view )
+				{
+
+					$array[0] = $value;
+				}
+			}
+		}
 
 		if( empty( $splat ) )
 		{
@@ -240,18 +313,40 @@ class Manager
 				if( $key == '/' )
 				{
 
-					return call_user_func_array( array( $view, $value ), array( $data, $this->splatToArray( $splat ) ) );
+					return call_user_func_array( array( $view, $value ), array( $data, $this->splatToArray( $splat, $this->getViewName( $view )  ) ) );
 				}
 			}
 
 			if( $splat == $key )
 			{
 
-				return call_user_func_array( array( $view, $value ), array( $data, $this->splatToArray( $splat ) ) );
+				return call_user_func_array( array( $view, $value ), array( $data, $this->splatToArray( $splat, $this->getViewName( $view ) ) ) );
 			}
 		}
 
 		return $view->process( $data );
+	}
+
+	/**
+	 * Gets the name of our view
+	 *
+	 * @param View $view
+	 *
+	 * @return string
+	 */
+
+	private function getViewName( View $view )
+	{
+
+		$reflection = new ReflectionClass( $view );
+
+		if( empty( $reflection ) )
+		{
+
+			throw new ControllerException();
+		}
+
+		return strtolower( $reflection->getShortName() );
 	}
 
 	/**
